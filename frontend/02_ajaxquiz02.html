@@ -22,11 +22,37 @@
             padding: 10px;
             border: 1px solid;
         }
+
+        .red{
+            color: red;
+            font-weight: bold;
+        }
     </style>
 
     <script>
         function q1() {
-            // 여기에 코드를 입력하세요
+          $.ajax({
+            type: "GET",
+            url: "http://spartacodingclub.shop/sparta_api/seoulbike",
+            data: {},
+            success: function (response) {
+              let rows = response['getStationList']['row'];
+              for (let i = 0; i < rows.length; i++) {
+                  let station_name = rows[i]['stationName'];
+                  let rackTotCnt = rows[i]['rackTotCnt'];
+                  let park = rows[i]['parkingBikeTotCnt']
+                  let temp_html = ``
+                  if (park < 5) {
+                      temp_html = `<tr><td class='red'>${station_name}</td><td class='red'>${rackTotCnt}</td><td class='red'>${park}</td></tr>`;
+                  } else {
+                      temp_html = `<tr><td>${station_name}</td><td>${rackTotCnt}</td><td>${park}</td></tr>`;
+                  }
+                  $('#names-q1').append(temp_html);
+              }
+            }
+          })
+
+
         }
     </script>
 
