@@ -36,7 +36,7 @@
             if(inputValue == ""){
                 alert("입력하세요!");
             } else if(inputValue.includes('@')){
-                alert(inputValue.split('@')[1]);
+                alert(inputValue.split('@')[1].split('.')[0]);
             } else {
                 alert("이메일이 아닙니다!");
             }
@@ -49,9 +49,7 @@
 
         function q3() {
             let inputValue = $('#input-q3').val();
-            let htmlList = `
-               <li>${inputValue}</li>
-            `;
+            let htmlList = `<li>${inputValue}</li>`
             $('#names-q3').append(htmlList);
 
 
