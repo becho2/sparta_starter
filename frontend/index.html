@@ -55,7 +55,7 @@
         /*}*/
 
         .posting-box{
-
+            display:none;
             padding: 50px;
             width: 500px;
             margin: 0px auto 20px auto;
@@ -79,6 +79,20 @@
         /*    padding-top: 20px;*/
         /*}*/
     </style>
+    <script>
+        $(document).ready(function() {
+            $('#btn-posting-box').click(function () {
+                $('#post-box').toggle();
+                let open = $('#btn-posting-box').text();
+                if(open == "포스팅박스 열기"){
+                    $('#btn-posting-box').text("포스팅박스 닫기");
+                } else {
+                    $('#btn-posting-box').text("포스팅박스 열기");
+                }
+            });
+        });
+    </script>
+
 </head>
 
 <body>
@@ -88,10 +102,10 @@
             <p class="lead">중요한 링크를 저장해두고, 나중에 볼 수 있는 공간입니다.</p>
             <hr class="my-4">
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button" onclick="hey()">포스팅박스 열기</a>
+                <a id="btn-posting-box" class="btn btn-primary btn-lg" href="#" role="button">포스팅박스 열기</a>
             </p>
         </div>
-        <div class="posting-box">
+        <div id="post-box" class="posting-box">
             <form>
                 <div class="form-group">
                     <label for="exampleInputEmail1">아티클 URL</label>
@@ -186,6 +200,7 @@
     <!--        </div>-->
 
     </div>
+
 </body>
 
 </html>
