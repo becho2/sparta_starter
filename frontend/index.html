@@ -31,6 +31,37 @@
             }
 	        count += 1;
         }
+        $(document).ready(function () {
+            $('#cards-box').empty()
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/post",
+                data: {},
+                success: function (response) {
+                    // console.log(response['articles'][0])
+                    // return false;
+                    let rows = response['articles'];
+                    for(let i = 0; i< rows.length; i++){
+                        let imgurl = rows[i]['image']
+                        let linkurl = rows[i]['url']
+                        let title = rows[i]['title']
+                        let desc = rows[i]['desc']
+                        let comment = rows[i]['comment']
+                        let temp_html = `
+                            <div class="card">
+                                <img class="card-img-top" src=${imgurl} alt="Card image cap">
+                                <div class="card-body">
+                                    <a href=${linkurl}>${title}</a>
+                                    <p class="card-text">${desc}</p>
+                                    <p class="comment">${comment}</p>
+                                </div>
+                            </div>`
+
+                        $('#cards-box').append(temp_html)
+                    }
+                }
+            })
+        });
     </script>
 
     <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
@@ -132,7 +163,7 @@
                 <button onclick="hey()" type="submit" class="btn btn-primary">기사저장</button>
             </form>
         </div>
-        <div class="card-columns">
+        <div id="cards-box" class="card-columns">
             <div class="card">
                 <img class="card-img-top" src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg" alt="Card image cap">
                 <div class="card-body">

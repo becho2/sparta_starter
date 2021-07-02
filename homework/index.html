@@ -49,9 +49,26 @@
         .wrap_btn{
             text-align: center;
         }
+        .blue{
+            color: blue;
+        }
 
 
     </style>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/rate",
+                data: {},
+                success: function (response) {
+                    let rate = response['rate'];
+                    $("#rate").text(rate);
+                }
+            })
+        });
+
+    </script>
 </head>
 
 <body>
@@ -124,7 +141,7 @@
         <div class="wrap_details">
             <p><span class="goods_name">안 사고 못 배기는 과일세트</span> 가격: 7,990원</p>
             <p>둘이 먹다 둘 다 죽어도 아무도 모르는 과일세트입니다. 식탁에 장식만 해둬도 있어보이지요. 식탁 위에 이 정도 과일바구니는 다들 있잖아요?</p>
-
+            <p class="blue">달러-원 환율: <span id="rate"></span></p>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">주문자 이름</span>
