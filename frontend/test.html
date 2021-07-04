@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+    <style>
+        .wrap {
+            width: 500px;
+            margin: auto;
+        }
+
+        #ice {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .order-item {
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .price {
+            font-size: 15px;
+        }
+
+        .btn {
+            width: 100px;
+            display: block;
+            margin: auto;
+        }
+    </style>
+    <script>
+        function order() {
+            alert('Order completed');
+        }
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <img id="ice" src="img/ice.jpeg" width=500 height=300>
+    <div class="item-desc">
+        <h1>Icecream <span class="price"><b>price:2,000won</b></span></h1>
+        <p><i><b> Flavors : Vanilla, Chocolate, Mint </b></i></p>
+        <div class="order-item">
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" id="btnGroupAddon">NAME</div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Input group example"
+                           aria-describedby="btnGroupAddon">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Quantity</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>-- Select a quantity. --</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" id="btnGroupAddon3">Adress</div>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Input group example"
+                               aria-describedby="btnGroupAddon">
+                    </div>
+
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" id="btnGroupAddon4">Phone Number</div>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Input group example"
+                               aria-describedby="btnGroupAddon">
+                    </div>
+
+
+        </div>
+    </div>
+</div>
+<button class="btn" onclick="order()" type="submit"><span style="color:gray">Order</span></button>
+</body>
+</html>
