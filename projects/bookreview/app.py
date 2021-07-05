@@ -14,7 +14,7 @@ def home():
 @app.route('/review', methods=['POST'])
 def write_review():
     title_rec = request.form['title']
-    author_rec = request.form['title']
+    author_rec = request.form['author']
     review_rec = request.form['bookReview']
     doc = {"title": title_rec, "author": author_rec, "review": review_rec}
     res = db.reviews.insert_one(doc)
@@ -24,9 +24,9 @@ def write_review():
 
 @app.route('/review', methods=['GET'])
 def read_reviews():
-    sample_receive = request.args.get('sample_give')
-    print(sample_receive)
-    return jsonify({'msg': '이 요청은 GET!'})
+    # sample_receive = request.args.get('sample_give')
+    reviews = list(db.reviews.find({}, {'_id': False}))
+    return jsonify({'msg': '성공!','reviews':reviews})
 
 
 if __name__ == '__main__':
