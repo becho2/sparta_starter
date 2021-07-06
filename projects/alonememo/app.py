@@ -21,14 +21,10 @@ def write_review():
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_rec, headers=headers)
     soup = BeautifulSoup(data.text, 'html.parser')
-    # body-content > div.newest-list > div > table > tbody > tr:nth-child(1)
-    # tr = soup.select_one('#body-content > div.newest-list > div > table > tbody > tr')
-    # content > div.article > div.mv_info_area > div.poster > a > img
-    title = soup.select_one('#content > div.article > div.mv_info_area > div.mv_info > h3 > a').text
-    image_url = soup.select_one('#content > div.article > div.mv_info_area > div.poster > a > img')['src']
-    synopsis = soup.select_one('#content > div.article > div.section_group.section_group_frst > div:nth-child(1) > div > div > p').text
-    print(title, image_url, synopsis)
-
+    title = soup.select_one('meta[property="og:title"]')['content']
+    image_url = soup.select_one('meta[property="og:image"]')['content']
+    synopsis = soup.select_one('meta[property="og:description"]')['content']
+    # print(title, image_url, synopsis)
     doc = {
         "url": url_rec,
         "comment": comment_rec,
