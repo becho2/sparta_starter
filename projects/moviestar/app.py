@@ -17,23 +17,25 @@ def home():
 # API 역할을 하는 부분
 @app.route('/api/list', methods=['GET'])
 def show_stars():
-    sample_receive = request.args.get('sample_give')
-    print(sample_receive)
-    return jsonify({'msg': 'list 연결되었습니다!'})
+    star_list = list(db.mystar.find({}, {'_id': False}).sort("like",-1))
+    # print(star_list)
+    return jsonify({'star_list': star_list})
 
 
 @app.route('/api/like', methods=['POST'])
 def like_star():
-    sample_receive = request.form['sample_give']
-    print(sample_receive)
-    return jsonify({'msg': 'like 연결되었습니다!'})
+    name_rec = request.form['name']
+    like_now = db.mystar.find_one({'name': name_rec},{'_id': False})['like']
+    like_plus = like_now + 1
+    db.mystar.update_one({'name':name_rec},{'$set':{'like': like_plus}})
+    return jsonify({'msg': '좋아요를 누르셨습니다!'})
 
 
 @app.route('/api/delete', methods=['POST'])
 def delete_star():
-    sample_receive = request.form['sample_give']
-    print(sample_receive)
-    return jsonify({'msg': 'delete 연결되었습니다!'})
+    name_rec = request.form['name']
+    db.mystar.delete_one({'name':name_rec})
+    return jsonify({'msg': '삭제되었습니다!'})
 
 
 if __name__ == '__main__':
