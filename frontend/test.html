@@ -1,80 +1,115 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>JQuery 연습하고 가기!</title>
-    <!-- JQuery를 import 합니다 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style type="text/css">
-        div.question-box {
-            margin: 10px 0 20px 0;
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+    <style>
+        .item-img {
+            width: 700px;
+            margin: auto;
+            height: 500px;
+            background-image: url("https://i.pinimg.com/originals/ee/96/13/ee96132a41b17307ad37468d342a61ee.jpg");
+            background-position: center;
+            background-size: cover;
         }
-        table {
-            border: 1px solid;
-            border-collapse: collapse;
+        .price {
+            font-size: 13px;
         }
-        td,
-        th {
-            padding: 10px;
-            border: 1px solid;
+        .item-desc {
+            width: 500px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin: auto;
         }
-        .urgent{
-          color: red;
+        .item-order {
+            width: 500px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin: auto;
+        .btn-order {
+            margin: auto;
+            width: 100px;
+            display: block;
+        }
+        .wrap {
+            width: 500px;
+            margin: auto;
         }
     </style>
     <script>
-        function q1() {
-          $('#names-q1').empty()
+        $(document).ready(function () {
+            exchange();
+        });
+        function exchange() {
             $.ajax({
                 type: "GET",
-                url: "http://spartacodingclub.shop/sparta_api/seoulbike",
+                url: "http://spartacodingclub.shop/sparta_api/rate",
                 data: {},
                 success: function (response) {
-                    let rows = response['getStationList']['row']
-                    for (let i = 0; i<rows.length; i++){
-                            let name = rows[i]['stationName']
-                            let rack = rows[i]['rackTotCnt']
-                            let bike = rows[i]['parkingBikeTotCnt']
-                      let temp_html = ``
-                      if (bike < 5){
-                        temp_html = `<tr class="urgent">
-                                          <td>${name}</td>
-                                          <td>${rack}</td>
-                                          <td>${bike}</td>
-                                        </tr>`
-                      } else {
-                        temp_html = `<tr>
-                                          <td>${name}</td>
-                                          <td>${rack}</td>
-                                          <td>${bike}</td>
-                                        </tr>`
-                      }
-                      $('#names-q1').append(temp_html)
-                    }
+                    let money = response['rate']
+                    $('#dollor').text(money)
                 }
             })
         }
     </script>
 </head>
 <body>
-    <h1>jQuery + Ajax의 조합을 연습하자!</h1>
-    <hr />
-    <div class="question-box">
-        <h2>2. 서울시 OpenAPI(실시간 따릉이 현황)를 이용하기</h2>
-        <p>모든 위치의 따릉이 현황을 보여주세요</p>
-        <p>업데이트 버튼을 누를 때마다 지웠다 새로 씌여져야 합니다.</p>
-        <button onclick="q1()">업데이트</button>
-        <table>
-            <thead>
-                <tr>
-                    <td>거치대 위치</td>
-                    <td>거치대 수</td>
-                    <td>현재 거치된 따릉이 수</td>
-                </tr>
-            </thead>
-            <tbody id="names-q1">
-            </tbody>
-        </table>
+<div class="wrap">
+    <div class="item-img"></div>
+    <div class="item-desc">
+        <h1> Jack의 감성을 팝니다 <span class="price"</span>가격:1,000만원/개</h1>
+        <p> 이 감성은 특별한 의미를 가지고 있어요 ! 사실 저의 소중한 밤을 기록했기 떄문이죠 <span id="dollor"</span></p>
     </div>
+    <div class="item-order">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">주문자 이름</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">수량</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01">
+                <option selected> --수량을 선택하세요--</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="adress">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">주소</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default"
+                       aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="number">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">전화번호</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <button type="button" class="btn btn-primary btn-order">주문하기</button>
+            </div>
+        </div>
 </body>
 </html>

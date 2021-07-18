@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Song+Myung&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Serif KR', serif;
+        }
+        .wrap {
+            display: block;
+            margin: auto;
+            width: 700px;
+        }
+        .main_image {
+            width: 700px;
+            height: 500px;
+            margin-top: 15px;
+            background-image: url("http://m.jslmtd.com/web/product/big/201907/9a820891aa11b50b3f2c18f1028f9b70.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+        .goods {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .goods_s_1 {
+            font-size: 35px;
+        }
+        .text_small {
+            font-size: 15px;
+            padding-left: 10px;
+        }
+        .btn {
+            display: block;
+            margin: 0 auto 10px auto;
+            width: 100px;
+        }
+        .table{
+            width:700px;
+            margin:0 auto;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            get_rate();
+        });
+        function get_rate() {
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/rate",
+                data: {},
+                success: function (response) {
+                    let rate_a = response['rate'];
+                    $('#rate_b').text(rate_a);
+                }
+            })
+        }
+        /* 4주차 숙제 라인 */
+        $(document).ready(function () {
+            $("#reviews-box").html("");
+            showReview();
+        });
+        function order_complete() {
+            let name = $('#name').val
+            let cnumber = $('#cnumber').val
+            let address = $('#address').val
+            let pnumber = $('#pnumber').val
+            $.ajax({
+                type: "POST",
+                url: "/order",
+                data: {
+                    name_give:name,
+                    cnumber_give:cnumber,
+                    address_give:address,
+                    pnumber_give:pnumber
+                },
+                success: function (response) {
+                    alert(response["msg"]);
+                    window.location.reload();
+                }
+            })
+        }
+        function showReview() {
+            $.ajax({
+                type: "GET",
+                url: "/order?sample_give=샘플데이터",
+                data: {},
+                success: function (response) {
+                    alert(response["msg"]);
+                }
+            })
+        }
+        /* 4주차 숙제 라인 */
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <div class="main_image"></div>
+    <div class="goods">
+        <p class="goods_s_1">리복 인스타펌프 퓨리 OG 료코 퓨리<span class="text_small">가격 150,000</span></p>
+        <p> 리복 퓨리의 새로운 변신, 지금 만나보세요. 새로운 유행의 주도자가 되어보세요. <br>
+            스타일과 편의성을 단 하나의 제품에서 찾아보세요 </p>
+        <p class="rate"> 현재 환율 : <span id="rate_b">  </span></p>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="name">주문자 이름</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text">수량</label>
+            </div>
+            <select class="custom-select" id="cnumber">
+                <option selected> -- 수량을 선택하세요 --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="address">주소</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="pnumber">전화번호</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <button onclick="order_complete()" class="btn btn-primary" type="submit">주문하기</button>
+    </div>
+</div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody id="order-box">
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
